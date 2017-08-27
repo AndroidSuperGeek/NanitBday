@@ -111,7 +111,9 @@ public class BirthdayDetailsFragment extends Fragment {
                 saveDetails();
                 FragmentManager manager = getFragmentManager ();
                 FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.contentFrame, new ShowBirthdayDetailsFragment ()).commit();
+                transaction.replace(R.id.contentFrame, new ShowBirthdayDetailsFragment ())
+                        .addToBackStack (ShowBirthdayDetailsFragment.class.getSimpleName ())
+                        .commit();
             }
         });
 

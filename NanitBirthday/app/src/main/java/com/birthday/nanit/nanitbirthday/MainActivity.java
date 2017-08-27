@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.contentFrame, new BirthdayDetailsFragment ()).commit();
+        transaction.add (R.id.contentFrame, new BirthdayDetailsFragment ())
+                .addToBackStack (BirthdayDetailsFragment.class.getSimpleName ())
+                .commit();
     }
 }

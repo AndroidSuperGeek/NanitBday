@@ -1,5 +1,7 @@
 package com.birthday.nanit.nanitbirthday;
 
+import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,12 +12,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Random;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Not finished yet..
  * This fragment will show the view of the bday details from the Edit fragment.
+ * Views are not yet connected to real data from Bundle.. just need to get the Bundle and set
+ * to the appropriate views.
+ *
+ * Dynamically UI works and close button.
+ * TODO : calcaulate the age and get from array.
+ *        UI finish.
+ *
  */
 public class ShowBirthdayDetailsFragment extends Fragment {
     private static final String ARG_NAME = "name";
@@ -30,16 +40,12 @@ public class ShowBirthdayDetailsFragment extends Fragment {
 
     private String mImageUrl;
 
-    @BindView(R.id.name)
-    TextView nameView;
-    @BindView(R.id.birrthday)
-    EditText bdayView;
+    @BindView (R.id.close)
+    ImageView closeButton;
 
-    @BindView (R.id.picture)
-    ImageView pictureView;
+    @BindView (R.id.photo_chooser)
+    ImageView photoChooser;
 
-    @BindView (R.id.showBirthday)
-    Button showBdayScreen;
 
     public ShowBirthdayDetailsFragment() {
     }
@@ -72,26 +78,50 @@ public class ShowBirthdayDetailsFragment extends Fragment {
             mBirthday = fragmentArgs.getString (ARG_BDAY);
             mImageUrl = fragmentArgs.getString (ARG_IMG);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate (R.layout.fragment_birthday_details, container, false);
+        View view = inflater.inflate (R.layout.fragment_show_birthday_details, container, false);
 
         ButterKnife.bind (this,view);
 
-        if ( showBdayScreen != null) {
-            showBdayScreen.setOnClickListener (new View.OnClickListener ( ) {
-                @Override
-                public void onClick(View view) {
-                    //move to next fragment
-                }
-            });
-        }
+        //do the same to match the array of the camera icon
+        final TypedArray myImages = getResources ().obtainTypedArray(R.array.bday_details_bg_image);
+        final Random random = new Random();
+
+        //Genrate a random index in the range
+        int randomInt = random.nextInt(myImages.length());
+
+        // Generate the drawableID from the randomInt
+        int drawableID = myImages.getResourceId(randomInt, -1);
+        view.setBackgroundResource(drawableID);
+
+        closeButton.setOnClickListener (new View.OnClickListener ( ) {
+            @Override
+            public void onClick(View view) {
+                finish ();
+            }
+        });
+
+        //step 4. get the result like we did in the previous fragment and set to the ImageView.
+        photoChooser.setOnClickListener (new View.OnClickListener ( ) {
+            @Override
+            public void onClick(View view) {
+                startActivity (new Intent (getContext (),ChooseImageActivity.class));
+            }
+        });
+
         return view;
+    }
+
+    /***
+     * Removes this fragment
+     */
+    private void finish(){
+        getActivity().getSupportFragmentManager().popBackStack ();
     }
 
     @Override
