@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BirthdayDetailsFragment">
+
+    <!--App title-->
+    <!--Name-->
+    <!--Birthday-->
+    <!--Picture-->
+    <!--“Show birthday screen” button (disabled while name & birthday are empty)-->
+
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/feedbackname"
+        android:inputType="textPersonName"
+        android:layout_margin="@dimen/edit_details_general_margin"/>
+
+    <EditText
+        android:id="@+id/birrthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/feedbackdate"
+        android:ems="10"
+        android:inputType="datetime"
+        android:layout_margin="@dimen/edit_details_general_margin"/>
+
+    <ImageView
+        android:id="@+id/picture"
+        android:background="@drawable/camera_icon_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/edit_details_general_margin"/>
+
+    <Button
+        android:id="@+id/showBirthday"
+        android:text="@string/showBdayScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:layout_margin="@dimen/edit_details_general_margin"/>
+
+
+</LinearLayout>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NanitBirthday</string>
+    <string name="showBdayScreen">Show Birthday Scrren</string>
+    <string name="feedbackname">Birthday child name</string>
+    <string name="feedbackdate">Set birthday date</string>
+    <string name="gallery_select">Choose from Gallery</string>
+</resources>
